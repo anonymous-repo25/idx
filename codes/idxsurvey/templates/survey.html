@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Answer Evaluator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Styles for .evaluated-question, .loader, and modal are now in style.css */
+        /* This inline style block can be removed if style.css is fully updated */
+        .evaluated-question {
+            color: red !important;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin-left: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="survey-header-utils">
+            <p>Welcome, {{ username }}! (<a href="{{ url_for('logout') }}">Logout</a>)</p>
+        </div>
+        <h1>LLM Answer Evaluator</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form id="evaluationForm" action="{{ url_for('submit_evaluation') }}" method="POST">
+            <div class="header-controls">
+                <div>
+                    <label for="file-select">File:</label>
+                    <select id="file-select" name="file_id" required>
+                        <option value="">-- Select a File --</option>
+                        {% for index, fid, fname in files %}
+                            <option value="{{ fid }}" data-filename="{{ fname }}" {% if fid|string == selected_fid|string %}selected{% endif %}>
+                                {{ index }}: {{ fname }}
+                            </option>
+                        {% else %}
+                            <option value="" disabled>No files available</option>
+                        {% endfor %}
+                    </select>
+                    <div id="file-loader" class="loader"></div>
+                </div>
+                <div>
+                    <label for="question-select">Question:</label>
+                    <select id="question-select" name="question_id" required>
+                        <option value="">-- Select a File First --</option>
+                    </select>
+                    <div id="question-loader" class="loader"></div>
+                </div>
+                <div class="pdf-view-link-container">
+                    <a href="#" id="viewPdfLink" class="button-like-link" style="display: none;">View Selected PDF</a>
+                </div>
+            </div>
+
+            <div id="selected-question-display-area" style="display: none;">
+                <p id="selected-question-searching-area" class="selected-question-details">Searching area: (None)</p>
+                <p id="selected-question-text" class="selected-question-details" style="margin-top: 5px;">Selected Question: (None)</p>
+                <p id="selected-question-description" class="selected-question-details">Description: (None)</p>
+            </div>
+
+            {% for i in range(1, 5) %}
+            <div class="model-evaluation-section">
+                <h2>Response Area {{ i }}</h2>
+                <label for="model{{i}}-answer" class="answer-label">Response Text {{i}}</label>
+                <textarea id="model{{i}}-answer" name="model{{i}}_answer" placeholder="Response Text for Area {{ i }}..."></textarea>
+                <div class="rating-group">
+                    <label><input type="radio" name="model{{i}}_rating" value="VB" required> VB</label>
+                    <label><input type="radio" name="model{{i}}_rating" value="B"> B</label>
+                    <label><input type="radio" name="model{{i}}_rating" value="M"> M</label>
+                    <label><input type="radio" name="model{{i}}_rating" value="G"> G</label>
+                    <label><input type="radio" name="model{{i}}_rating" value="VG"> VG</label>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="action-buttons">
+                <button type="submit" class="save-button">Save Evaluation</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close-button">&times;</span>
+            <h3 id="pdfModalTitle">PDF Document</h3>
+            <div class="pdf-viewer-container">
+                <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+                <p id="pdfFallbackLinkContainer" style="display:none;">Your browser might not display PDFs in an iframe. You can <a id="pdfFallbackLink" href="" target="_blank">download the PDF here</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

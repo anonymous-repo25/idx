@@ -1,0 +1,473 @@
+/* static/css/style.css */
+/* Common body styles */
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    background-color: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Login/Register Page Styles --- */
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.login-container h1 {
+    color: #1d2129;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.login-container p {
+    color: #606770;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4b4f56;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] { /* Added email for consistency */
+    width: calc(100% - 24px); /* Account for padding */
+    padding: 12px;
+    border: 1px solid #ccd0d5;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="email"]:focus {
+    border-color: #1877f2;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+}
+
+.login-button { /* Can be reused for general form buttons */
+    background-color: #1877f2;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #166fe5;
+}
+
+.footer-links {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.footer-links a {
+    color: #1877f2;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Alert Styles for Flashed Messages */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    color: #fff;
+    text-align: center;
+}
+.alert-success { background-color: #28a745; }
+.alert-danger  { background-color: #dc3545; }
+.alert-warning { background-color: #ffc107; color: #333; } /* Warning often has dark text */
+.alert-info    { background-color: #17a2b8; }
+
+
+/* --- Survey Page Styles --- */
+.survey-header-utils { /* Wrapper for welcome message */
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    padding-right: 5px; /* Small padding if container has padding */
+}
+
+.container { /* Used by survey page */
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    /* margin-top: 20px; Removed to allow survey-header-utils to sit above */
+}
+
+.container h1 { /* Survey H1 */
+    text-align: center;
+    color: #343a40;
+    margin-top: 0; /* Adjusted margin */
+    margin-bottom: 20px; /* Adjusted margin */
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.header-controls {
+    display: flex;
+    gap: 15px; /* Adjusted gap */
+    margin-bottom: 10px; /* Reduced margin as question display is below */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-controls > div { /* Ensure label and select are grouped and loader is next to it */
+    display: flex;
+    align-items: center;
+}
+.pdf-view-link-container { /* Container for the PDF link */
+    margin-left: auto; /* Pushes it to the right if space allows */
+    padding-left: 15px; /* Space from other controls */
+}
+
+.button-like-link {
+    display: inline-block;
+    padding: 8px 15px; /* Slightly smaller padding than main buttons */
+    background-color: #6c757d; /* Secondary button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    border: 1px solid #6c757d;
+}
+.button-like-link:hover {
+    background-color: #5a6268;
+    color: white;
+}
+
+
+.header-controls label {
+    font-weight: 500;
+    color: #495057;
+    margin-right: 8px; /* Space between label and select */
+}
+
+.header-controls select {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 16px;
+    min-width: 180px; /* Adjusted min-width */
+    background-color: #fff;
+}
+
+/* Style for the selected question display area */
+#selected-question-display-area {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #e9ecef; /* Light grey background */
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.selected-question-details { /* Class for the <p> tag inside */
+    font-size: 16px;
+    color: #212529; /* Darker text for readability */
+    line-height: 1.6;
+    margin: 0; /* Remove default p margin */
+}
+
+
+.model-evaluation-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background-color: #fdfdff;
+}
+
+.model-evaluation-section h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.model-evaluation-section .answer-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+.model-evaluation-section textarea {
+    width: calc(100% - 22px);
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    resize: vertical;
+    margin-bottom: 15px;
+}
+
+.rating-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.rating-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    color: #495057;
+    cursor: pointer;
+}
+
+.rating-group input[type="radio"] {
+    margin-right: 3px;
+    accent-color: #007bff;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.action-buttons button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.save-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #218838;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.next-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.next-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.evaluated-question {
+    color: red !important;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: none;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* PDF Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 900px; /* Max width */
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-close-button {
+    color: #aaa;
+    float: right; /* Position to the top right */
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* Position relative to modal-content */
+    top: 10px;
+    right: 20px;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.pdf-viewer-container {
+    flex-grow: 1; /* Allow it to take available space */
+    height: 70vh; /* Set a good height for the PDF viewer */
+    overflow: hidden; /* Hide scrollbars if iframe handles its own */
+}
+
+#pdfViewer {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc; /* Optional border for the iframe */
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .header-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .header-controls select, .pdf-view-link-container {
+        width: 100%;
+        margin-bottom: 10px; /* Space out when stacked */
+    }
+    .pdf-view-link-container {
+        margin-left: 0; /* Reset margin when stacked */
+        text-align: left; /* Align link to left when stacked */
+    }
+    .container {
+        padding: 20px;
+    }
+    .container h1 {
+        font-size: 24px;
+    }
+    .model-evaluation-section h2 {
+        font-size: 18px;
+    }
+    #selected-question-display-area {
+        padding: 10px;
+    }
+    .selected-question-details {
+        font-size: 15px;
+    }
+    .modal-content {
+        width: 90%;
+        margin: 10% auto;
+        padding: 15px;
+    }
+    .pdf-viewer-container {
+        height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        margin: 20px;
+        padding: 30px;
+    }
+    .login-container h1 {
+        font-size: 24px;
+    }
+    .rating-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .action-buttons {
+        flex-direction: column;
+    }
+    .action-buttons button {
+        width: 100%;
+    }
+    .header-controls > div {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    .header-controls label {
+        margin-bottom: 5px;
+        margin-right: 0;
+    }
+    .header-controls select {
+        min-width: auto;
+        width: 100%;
+    }
+    .selected-question-details {
+        font-size: 14px;
+    }
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    .pdf-viewer-container {
+        height: 50vh;
+    }
+}
